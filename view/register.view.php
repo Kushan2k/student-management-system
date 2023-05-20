@@ -1,3 +1,10 @@
+<?php
+include_once '../config/Database.php';
+$DB = Database::getDB()==null?die:Database::getDB();
+
+include_once '../config/Course.php';
+http_response_code(200);
+?>
 <html lang="en">
 
   <head>
@@ -95,21 +102,22 @@
             </div>
             <br>
             <div class="row mx-auto gap-2">
-              <div class="col-12 col-md-4">
+              <div class="col-3">
                 <label for="" class="form-label text-capitalize">Balance</label>
                 <input type="number" placeholder='Enter Balance' name='stbalance' class="form-control" aria-label="">
               </div>
-              <div class="col-12 col-md-4">
-                <label for="" class="form-label text-capitalize">student status</label>
-                <select name="ststatus" class='form-select'>
-                  <option value='active' selected>ACTIVE</option>
-                  <option value='inactive'>INACTIVE</option>
+
+              <div class="col-8">
+                <label for="" class="form-label text-capitalize">Select Course</label>
+                <select name="course" class='form-select'>
+                  <?php
+                    foreach (getAllCourse($DB) as $value) {?>
+                      <option value='<?= $value['id']?>'><?=ucfirst($value['name'])?></option>
+                   <?php }
+                  ?>
                 </select>
               </div>
-              <div class="col-12">
-                <label for="" class="form-label text-capitalize">Completed or discontinuedd date</label>
-                <input type="date" class="form-control" name='stfinished' aria-label="">
-              </div>
+              
 
             </div>
             <br>

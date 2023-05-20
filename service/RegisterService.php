@@ -3,15 +3,16 @@ if(session_status()!=PHP_SESSION_ACTIVE){
   session_start();
 }
 include_once '../config/Database.php';
+include_once '../config/Course.php';
+include_once '../config/User.php';
 
 class RegisterService{
-  
-  
-  
+
 
   public static function registerUser($req,$files){
 
     $DB = Database::getDB();
+    $user = new User($DB);
 
     // echo '<pre>';
     // print_r($DB);
@@ -21,23 +22,30 @@ class RegisterService{
     if($DB==null){
       return;
     }
-    $finishedDate = $req['stfinished'];
+    $finishedDate = 'N/A';
     $stName = $req['stname'];
     $ParentName = $req['pname'];
     $stID = $req['stid'];
     $stcontact = $req['stcontact'];
     $staddress = $req['staddress'];
     $stbalance = $req['stbalance'];
-    $status = $req['ststatus'];
+    $status = "INACTIVE";
     $stregfee = $req['stregfee'];
     $ststpaid = $req['stpaid'];
     $stregdate = $req['stregdate'];
     $class = $req['stclass'];
     $stemail = filter_var($req['stemail'], FILTER_VALIDATE_EMAIL);
     $dob = $req['stdob'];
+    $course = $req['course'];
 
     $img = $files['stimg'];
     $UPLOAD_DIR = '../public/profiles/';
+
+    if(!$user->checkEmailExsists($stemail)){
+      $_SESSION['error'] = 'Email already Registerd!';
+      header("Location:../index.php");
+      return;
+    }
 
     if(!$stemail){
       $_SESSION['error'] = 'Email is not valid!';
@@ -72,8 +80,15 @@ class RegisterService{
         $stregfee,$class,$img_url,$stcontact,$stbalance,$finishedDate,$stID,$status
         );
         
+        
         if($stm->execute()){
           $_SESSION['msg'] = 'Registration successful!';
+
+          $currentStID = $user->getStudentID($stemail);
+
+          EnrollCourse($course, $currentStID, $DB);
+          
+          
           
           return true;
         }else{
@@ -97,4 +112,5 @@ class RegisterService{
     
   }
 
+ 
 }

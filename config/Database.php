@@ -43,7 +43,7 @@ class Database{
       img_url VARCHAR(255),
       contact VARCHAR(11) NOT NULL,
       balance INT DEFAULT 0,
-      finish_date VARCHAR(255)
+      finish_date VARCHAR(255) DEFAULT 'N/A'
     )
     ";
     self::$DB->query($stm);
