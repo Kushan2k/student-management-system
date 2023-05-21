@@ -12,6 +12,7 @@ include_once '../config/Database.php';
 include_once '../config/User.php';
 include_once '../config/Course.php';
 $user=new User(Database::getDB());
+$courses = getAllCourse(Database::getDB());
 ?>
 <html lang="en">
 
@@ -34,7 +35,7 @@ $user=new User(Database::getDB());
   <body>
     <div class="container py-5">
       <div class="container my-3">
-
+        <a href='../index.php' class='btn btn-sm btn-danger'>Back</a>
         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addcourseModel">
           Add Course
         </button>
@@ -43,6 +44,7 @@ $user=new User(Database::getDB());
              aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
+              
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Add Course</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -96,9 +98,12 @@ $user=new User(Database::getDB());
 
           <div class="col-12 my-3">
             <select name="" id="" class="form-select">
-              <option value="">sdfsdf sdfsdfsdfssdf</option>
-              <option value="">sdfsdf sdfsdfsdfssdf</option>
-              <option value="">sdfsdf sdfsdfsdfssdf</option>
+              <?php
+              foreach ($courses as $course) {
+                echo '<option value="'.$course['name'].'">'.ucfirst($course['name']).'</option>';
+              }
+              ?>
+              
             </select>
           </div>
           <div class="col-10 mx-auto">
@@ -161,7 +166,7 @@ $user=new User(Database::getDB());
 
                 </td>
                 <td>
-                  <a href="" class="text-success"><i class="fa-solid fa-pen"></i></a>
+                  <a href="./edit.view.php?stid=<?=$student['id']?>" class="text-success"><i class="fa-solid fa-pen"></i></a>
                   <button type="button" class="border-0 text-danger" data-bs-toggle="modal"
                           data-bs-target="#exampleModal<?=$student['id']?>">
                     <i class="fa-solid fa-trash"></i>

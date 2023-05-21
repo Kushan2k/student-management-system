@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   
 
   if($res!=null){
-    $_SESSION['user_id'] = $res[1];
+    $_SESSION['user_id'] = $id;
     header("Location:../view/mycourse.view.php",true);
     return;
   }

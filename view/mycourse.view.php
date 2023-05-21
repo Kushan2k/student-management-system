@@ -1,6 +1,11 @@
 <?php
 session_start();
+include_once '../config/Database.php';
+include_once '../config/User.php';
 
+$user = new User(Database::getDB());
+
+print_r($user->getCourseForUser($_SESSION['user_id']));
 
 ?>
 

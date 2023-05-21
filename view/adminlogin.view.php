@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if($_SESSION['isadmin']==1 && isset($_SESSION['isadmin'])){
+  header("Location:./admin.dashboard.php");
+}
+
+?>
+
 <html lang="en">
 
   <head>

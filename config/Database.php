@@ -31,6 +31,7 @@ class Database{
       id INT AUTO_INCREMENT,
       student_id INT NOT NULL,
       name VARCHAR(255) NOT NULL,
+      NIC VARCHAR(20) NOT NULL DEFAULT 'N/A',
       address VARCHAR(255) NOT NULL,
       parent_name VARCHAR(255) NULL DEFAULT 'None',
       email VARCHAR(255) NOT NULL,

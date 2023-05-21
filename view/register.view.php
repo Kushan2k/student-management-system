@@ -30,15 +30,15 @@ http_response_code(200);
             <div class="row mx-auto gap-2">
               <div class="col-12 col-md-3">
                 <label for="" class="form-label text-capitalize ">student id</label>
-                <input placeholder="Enter Student ID" type="number" name='stid' class="form-control" aria-label="">
+                <input placeholder="Enter Student ID" required type="number" name='stid' class="form-control" aria-label="">
               </div>
               <div class="col-12 col-md-4">
                 <label for="" class="form-label text-capitalize">student Name</label>
-                <input placeholder='Enter Student Name' name='stname' type="text" class="form-control">
+                <input placeholder='Enter Student Name' required name='stname' type="text" class="form-control">
               </div>
               <div class="col-12 col-md-4">
                 <label for="" class="form-label text-capitalize">parent Name</label>
-                <input placeholder='Enter Parent Name' name='pname' type="text" class="form-control">
+                <input placeholder='Enter Parent Name' required name='pname' type="text" class="form-control">
               </div>
             </div>
             <br>
@@ -51,15 +51,15 @@ http_response_code(200);
               </div> -->
               <div class="col-12 col-md-3">
                 <label for="" class="form-label text-capitalize">student address</label>
-                <input type="text" placeholder='Enter Student Address' name="staddress" id="" class="form-control">
+                <input type="text" required placeholder='Enter Student Address' name="staddress" id="" class="form-control">
               </div>
               <div class="col-12 col-md-4">
                 <label for="" class="form-label text-capitalize">Date Of Birth</label>
-                <input type="date" name="stdob" id="" class="form-control">
+                <input type="date" name="stdob" required id="" class="form-control">
               </div>
               <div class="col-12 col-md-4">
                 <label for="" class="form-label text-capitalize">profile photo</label>
-                <input type="file" name="stimg" id="" class="form-control">
+                <input type="file" required name="stimg" id="" class="form-control">
               </div>
               <!-- <div class="col-12 col-md-4">
                 <label for="" class="form-label">Gender</label>
@@ -74,22 +74,22 @@ http_response_code(200);
             <div class="row mx-auto gap-2">
               <div class="col-12 col-md-3">
                 <label for="" class="form-label text-capitalize">Student Email</label>
-                <input type="email" placeholder='Enter Student Email' name='stemail' class="form-control" aria-label="">
+                <input type="email" required placeholder='Enter Student Email' name='stemail' class="form-control" aria-label="">
               </div>
               <div class="col-12 col-md-4">
                 <label for="" class="form-label text-capitalize">Contact number</label>
-                <input type="text" placeholder='Contact Number' name='stcontact' class="form-control">
+                <input type="text" placeholder='Contact Number' required name='stcontact' class="form-control">
               </div>
               <div class="col-12 col-md-4">
                 <label for="" class="form-label text-capitalize">Student class</label>
-                <input type="number" placeholder='1' name='stclass' class="form-control">
+                <input type="number" placeholder='1' required name='stclass' class="form-control">
               </div>
             </div>
             <br>
             <div class="row mx-auto gap-2">
               <div class="col-12 col-md-3">
                 <label for="" class="form-label text-capitalize">registration date</label>
-                <input type="date" class="form-control" name='stregdate' aria-label="">
+                <input type="date" class="form-control" required name='stregdate' aria-label="">
               </div>
               <div class="col-12 col-md-4">
                 <label for="" class="form-label text-capitalize">registration fee</label>
@@ -102,12 +102,12 @@ http_response_code(200);
             </div>
             <br>
             <div class="row mx-auto gap-2">
-              <div class="col-3">
+              <div class="col-12 col-md-3">
                 <label for="" class="form-label text-capitalize">Balance</label>
                 <input type="number" placeholder='Enter Balance' name='stbalance' class="form-control" aria-label="">
               </div>
 
-              <div class="col-8">
+              <div class="col-12 col-md-5">
                 <label for="" class="form-label text-capitalize">Select Course</label>
                 <select name="course" class='form-select'>
                   <?php
@@ -116,6 +116,10 @@ http_response_code(200);
                    <?php }
                   ?>
                 </select>
+              </div>
+              <div class="col-12 col-md-3">
+                <label for="" class="form-label text-capitalize">NIC</label>
+                <input type="text" required placeholder='Enter NIC' name='nic' class="form-control" aria-label="">
               </div>
               
 

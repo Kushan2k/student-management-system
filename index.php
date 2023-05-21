@@ -63,7 +63,7 @@ if(session_status()!=PHP_SESSION_ACTIVE){
       .box {
         position: absolute;
         bottom: 10px;
-        right: 10px;
+        left: 10px;
       }
     </style>
 

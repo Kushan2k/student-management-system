@@ -99,6 +99,32 @@ class User{
 
   }
 
+  function getCourseForUser($id){
+
+    $sql = "SELECT * FROM student LEFT JOIN registrations ON student.id=registrations.student_id WHERE student.student_id={$id}";
+
+    $res = $this->db->query($sql);
+    if($res==TRUE && $res->num_rows>0){
+      return $res->fetch_assoc();
+    }else{
+      return $this->db->error;
+    }
+  }
+
+  function getStudentByID($id):array|null{
+    $sql = "SELECT * FROM student WHERE id=?";
+    $stm = $this->db->prepare($sql);
+    $stm->bind_param('i', $id);
+    if($stm->execute()){
+      $res = $stm->get_result();
+      if($res->num_rows>0){
+        return $res->fetch_assoc();
+      }
+      return null;
+    }
+    return null;
+  }
+
   
 
 

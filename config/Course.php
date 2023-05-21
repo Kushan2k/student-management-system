@@ -33,7 +33,7 @@ function EnrollCourse($coursID,$userID,$db):bool{
 }
 
 function GetEntroledCourse($userid,$db):array|null{
-  $stm = $db->prepare("SELECT name FROM registrations RIGHT JOIN course ON registrations.course_id=course.id WHERE student_id=?");
+  $stm = $db->prepare("SELECT * FROM registrations  LEFT JOIN course ON registrations.course_id=course.id WHERE student_id=?");
   $stm->bind_param('i', $userid);
   $courses = [];
   if($stm->execute()){
