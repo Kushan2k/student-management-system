@@ -120,6 +120,7 @@ http_response_code(200);
               <div class="col-12 col-md-3">
                 <label for="" class="form-label text-capitalize">NIC</label>
                 <input type="text" required placeholder='Enter NIC' name='nic' class="form-control" aria-label="">
+                <small class='text-muted'>required</small>
               </div>
               
 

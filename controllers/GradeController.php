@@ -15,12 +15,12 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
   $user=new User(Database::getDB());
-  $id = htmlspecialchars($_POST['certificate_num']);
+  $nic = htmlspecialchars($_POST['nic']);
 
-  $res = $user->getStatus($id);
+  $id = $user->getStatus($nic);
   
 
-  if($res!=null){
+  if($id!=null && $id>0){
     $_SESSION['user_id'] = $id;
     header("Location:../view/mycourse.view.php",true);
     return;

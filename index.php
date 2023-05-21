@@ -36,13 +36,18 @@ if(session_status()!=PHP_SESSION_ACTIVE){
         <p class="alert alert-danger text-center"><?=ucfirst($_SESSION['error']) ?></p>
       </div>
       <?php $_SESSION['error'] = null;}
+      if(isset($_SESSION['msg'])){?>
+      <div class="container my-2">
+        <p class="alert alert-danger text-center"><?=ucfirst($_SESSION['msg']) ?></p>
+      </div>
+      <?php $_SESSION['msg'] = null;}
      ?>
       <div class="row mt-5">
         <div class="col-12 col-lg-6 mx-auto">
           <h3 class="display-5 my-2 text-center fw-bold text-white">Certificate Verification</h3>
           <form action="./controllers/GradeController.php" method="post">
             <div class="form-group d-flex flex-row mt-2" style="border-radius: 10px;">
-              <input required placeholder="Enter Certificate Number Here" type="text" name="certificate_num"
+              <input required placeholder="Enter NIC Here" type="text" name="nic"
                      class="form-control border-0" style="border-radius: 10px 0px 0px 10px;">
               <button name="serach" type="submit" class="border-0"
                       style="background-color: lightgray;border-radius: 0px 7px 7px 0px;"><i
@@ -55,14 +60,14 @@ if(session_status()!=PHP_SESSION_ACTIVE){
         </div>
       </div>
       <div class="box">
-        <a href="./view/adminlogin.view.php" target="_self">Admin Login</a>
+        <a href="./view/adminlogin.view.php" class='text-white' target="_self">Admin Login</a>
       </div>
     </div>
 
     <style>
       .box {
         position: absolute;
-        bottom: 10px;
+        bottom: 20px;
         left: 10px;
       }
     </style>

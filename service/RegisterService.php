@@ -29,7 +29,6 @@ class RegisterService{
     $stcontact = $req['stcontact'];
     $staddress = $req['staddress'];
     $stbalance = $req['stbalance'];
-    $status = "INACTIVE";
     $stregfee = $req['stregfee'];
     $ststpaid = $req['stpaid'];
     $stregdate = $req['stregdate'];
@@ -71,14 +70,14 @@ class RegisterService{
     try{
       $stm = $DB->prepare(
         "INSERT INTO student
-        (name,parent_name,address,email,date_of_birth,reg_date,paid_amount,fees,class_in,img_url,contact,balance,finished_date,student_id,status,NIC)
-        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        (name,parent_name,address,email,date_of_birth,reg_date,paid_amount,fees,class_in,img_url,contact,balance,finished_date,student_id,NIC)
+        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
       );
 
       if($stm){
 
-        $stm->bind_param('ssssssiiissisiss',$stName,$ParentName,$staddress,$stemail,$dob,$stregdate,$ststpaid,
-        $stregfee,$class,$img_url,$stcontact,$stbalance,$finishedDate,$stID,$status,$nic
+        $stm->bind_param('ssssssiiissisis',$stName,$ParentName,$staddress,$stemail,$dob,$stregdate,$ststpaid,
+        $stregfee,$class,$img_url,$stcontact,$stbalance,$finishedDate,$stID,$nic
         );
         
         

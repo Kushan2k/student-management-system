@@ -39,7 +39,6 @@ class Database{
       reg_date VARCHAR(255),
       paid_amount INT DEFAULT 0,
       fees INT DEFAULT 0,
-      status VARCHAR(10) NOT NULL DEFAULT 'INACTIVE',
       class_in INT,
       img_url VARCHAR(255),
       contact VARCHAR(11) NOT NULL,

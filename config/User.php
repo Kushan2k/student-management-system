@@ -14,12 +14,12 @@ class User{
 
   }
 
-  public function getStatus($index):bool|array{
+  public function getStatus($index){
 
-    $res = $this->db->query("SELECT id,status FROM student WHERE student_id={$index}");
+    $res = $this->db->query("SELECT id FROM student WHERE NIC={$index}");
     if($res==TRUE && $res->num_rows>0){
       $data = $res->fetch_assoc();
-      return [$data['status'], $data['id']];
+      return  $data['id'];
     }
 
 
@@ -101,13 +101,13 @@ class User{
 
   function getCourseForUser($id){
 
-    $sql = "SELECT * FROM student LEFT JOIN registrations ON student.id=registrations.student_id WHERE student.student_id={$id}";
+    $sql = "SELECT * FROM student LEFT JOIN registrations ON student.id=registrations.student_id WHERE student.id={$id}";
 
     $res = $this->db->query($sql);
     if($res==TRUE && $res->num_rows>0){
       return $res->fetch_assoc();
     }else{
-      return $this->db->error;
+      return null;
     }
   }
 
