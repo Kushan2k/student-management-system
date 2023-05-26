@@ -16,7 +16,7 @@ class User{
 
   public function getStatus($index){
 
-    $res = $this->db->query("SELECT id FROM student WHERE NIC={$index}");
+    $res = $this->db->query("SELECT id FROM student INNER JOIN registrations ON student.id=registrations.student_id WHERE student.NIC={$index} OR student.student_id='{$index}' OR registrations.cetificate_no='{$index}'");
     if($res==TRUE && $res->num_rows>0){
       $data = $res->fetch_assoc();
       return  $data['id'];
@@ -123,6 +123,16 @@ class User{
       return null;
     }
     return null;
+  }
+
+  function updateStudentID($stid,$newid){
+    $sql = "UPDATE student SET student_id='{$newid}' WHERE id={$stid}";
+
+    if($this->db->query($sql)==TRUE){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   

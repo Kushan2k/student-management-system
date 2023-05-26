@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if($_SESSION['isadmin']==1 && isset($_SESSION['isadmin'])){
+if(isset($_SESSION['isadmin']) && $_SESSION['isadmin']==1 ){
   header("Location:./admin.dashboard.php");
 }
 

@@ -28,15 +28,15 @@ http_response_code(200);
         <div class="col-10 mx-auto">
           <form action="../controllers/RegisterController.php" method="post" enctype="multipart/form-data">
             <div class="row mx-auto gap-2">
-              <div class="col-12 col-md-3">
+              <!-- <div class="col-12 col-md-3">
                 <label for="" class="form-label text-capitalize ">student id</label>
                 <input placeholder="Enter Student ID" required type="number" name='stid' class="form-control" aria-label="">
-              </div>
-              <div class="col-12 col-md-4">
+              </div> -->
+              <div class="col-12 col-md-6">
                 <label for="" class="form-label text-capitalize">student Name</label>
                 <input placeholder='Enter Student Name' required name='stname' type="text" class="form-control">
               </div>
-              <div class="col-12 col-md-4">
+              <div class="col-12 col-md-5">
                 <label for="" class="form-label text-capitalize">parent Name</label>
                 <input placeholder='Enter Parent Name' required name='pname' type="text" class="form-control">
               </div>

@@ -3,6 +3,12 @@ if(session_status()!=PHP_SESSION_ACTIVE){
   session_start();
 }
 
+
+
+// header("Location:./error.php", true, 301);
+
+
+
 ?>
 
 <html lang="en">
@@ -11,7 +17,7 @@ if(session_status()!=PHP_SESSION_ACTIVE){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -38,7 +44,7 @@ if(session_status()!=PHP_SESSION_ACTIVE){
       <?php $_SESSION['error'] = null;}
       if(isset($_SESSION['msg'])){?>
       <div class="container my-2">
-        <p class="alert alert-danger text-center"><?=ucfirst($_SESSION['msg']) ?></p>
+        <p class="alert alert-success text-center"><?=ucfirst($_SESSION['msg']) ?></p>
       </div>
       <?php $_SESSION['msg'] = null;}
      ?>
@@ -47,7 +53,7 @@ if(session_status()!=PHP_SESSION_ACTIVE){
           <h3 class="display-5 my-2 text-center fw-bold text-white">Certificate Verification</h3>
           <form action="./controllers/GradeController.php" method="post">
             <div class="form-group d-flex flex-row mt-2" style="border-radius: 10px;">
-              <input required placeholder="Enter NIC Here" type="text" name="nic"
+              <input required placeholder="Enter NIC/Student Id/Certificate Id Here" type="text" name="nic"
                      class="form-control border-0" style="border-radius: 10px 0px 0px 10px;">
               <button name="serach" type="submit" class="border-0"
                       style="background-color: lightgray;border-radius: 0px 7px 7px 0px;"><i

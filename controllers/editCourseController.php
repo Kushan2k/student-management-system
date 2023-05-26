@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once '../config/Database.php';
+include_once '../config/User.php';
 
 if($_SERVER['REQUEST_METHOD']=='GET'){
   header("Location:../index.php");
@@ -11,9 +12,13 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
 
 if (isset($_POST['save'])){
 
-  
+  $user = new User(Database::getDB());
+
   $regid=$_POST['courseID'];
   $compled=isset($_POST['completed'])?1:0;
+  $stid = htmlspecialchars($_POST['stid']);
+  $id = $_POST['id'];
+
 
   if($compled==1){
     $compltedDate = $_POST['completed_date'];
@@ -33,11 +38,12 @@ if (isset($_POST['save'])){
   }
   $stm = $db->prepare($sql);
   $stm->bind_param('siii', $compltedDate, $compled, $certificatedid, $regid);
-  if($stm->execute()){
+  if($stm->execute() && $user->updateStudentID($id,$stid)){
     $_SESSION['msg'] = 'Updated!';
     header("Location:{$_SERVER['HTTP_REFERER']}");
     return;
   }
+  
   $_SESSION['msg'] = 'update failed!';
   header("Location:{$_SERVER['HTTP_REFERER']}");
   return;

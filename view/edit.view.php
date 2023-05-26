@@ -111,6 +111,10 @@ $courses = GetEntroledCourse($_GET['stid'], Database::getDB());
                         <form action="../controllers/editCourseController.php" method="POST">
                           <div class="modal-body">
                             <div class="form-group my-2">
+                              <label for="" class="form-label">Student ID</label>
+                              <input type="text" id='id' required value="<?=$student['student_id']?>" placeholder='Student ID'name="stid" class="form-control">
+                            </div>
+                            <div class="form-group my-2">
                               <label for="" class="form-label">Completed</label>
                               <input type="checkbox" id='status' name="completed" class="">
                             </div>
@@ -133,6 +137,7 @@ $courses = GetEntroledCourse($_GET['stid'], Database::getDB());
 
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <input type="hidden" name="courseID" value="<?= $course['reg_id']?>">
+                            <input type="hidden" name="id" value="<?= $student['id']?>">
 
                             <button type="submit" name="save" class="btn btn-success">Save</button>
 
