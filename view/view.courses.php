@@ -33,6 +33,11 @@ $courses = getAllCourse(Database::getDB());
   <body>
     <div class="container p-5">
       <h4 class="display-6 text-center">Available Courses</h4>
+      <div class="row">
+        <div class="col-3">
+          <a href="./admin.dashboard.php" class="btn btn-sm btn-warning">Back</a>
+        </div>
+      </div>
       <?php
       if(isset($_SESSION['error'])){?>
       <div class="row">
