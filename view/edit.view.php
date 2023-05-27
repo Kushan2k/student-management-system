@@ -112,8 +112,69 @@ $courses = GetEntroledCourse($_GET['stid'], Database::getDB());
                           <div class="modal-body">
                             <div class="form-group my-2">
                               <label for="" class="form-label">Student ID</label>
-                              <input type="text" id='id' required value="<?=$student['student_id']?>" placeholder='Student ID'name="stid" class="form-control">
+                              <input type="text" id='id' required value="<?=$student['student_id']?>"
+                                     placeholder='Student ID' name="stid" class="form-control">
                             </div>
+
+
+                            <div class="form-group my-2">
+                              <label for="" class="form-label">Student Name</label>
+                              <input type="text" id='id' required value="<?=$student['name']?>"
+                                     placeholder='Student Name' name="name" class="form-control">
+                            </div>
+                            <div class="form-group my-2">
+                              <label for="" class="form-label">Student Address</label>
+                              <input type="text" id='id' required value="<?=$student['address']?>" placeholder='Address'
+                                     name="address" class="form-control">
+                            </div>
+                            <div class="form-group my-2">
+                              <label for="" class="form-label">Contact</label>
+                              <input type="text" id='id' required value="<?=$student['contact']?>" placeholder='Contact'
+                                     name="contact" class="form-control">
+                            </div>
+                            <div class="row mx-auto">
+                              <div class="col-8 my-2">
+                                <label for="" class="form-label">Email</label>
+                                <input type="text" id='id' required value="<?=$student['email']?>" placeholder='Email'
+                                       name="email" class="form-control">
+                              </div>
+                              <div class="col-4 my-2">
+                                <label for="" class="form-label">NIC</label>
+                                <input type="text" id='id' required value="<?=$student['NIC']?>" placeholder='NIC'
+                                       name="nic" class="form-control">
+                              </div>
+                            </div>
+                            <div class="row mx-auto">
+                              <div class="col-12 col-md-6 my-2">
+                                <label for="" class="form-label">Date of Birth</label>
+                                <input type="date" id='id' required value="<?=$student['date_of_birth']?>"
+                                       placeholder='Birth date' name="dob" class="form-control">
+                              </div>
+                              <div class="col-12 col-md-6 my-2">
+                                <label for="" class="form-label">Registration Date</label>
+                                <input type="date" id='id' required value="<?=$student['reg_date']?>"
+                                       placeholder='Student Registration date' name="regdate" class="form-control">
+                              </div>
+                            </div>
+                            <div class="row mx-auto">
+                              <div class="col-12 col-md-4 my-2">
+                                <label for="" class="form-label">Paid Amount(LKR)</label>
+                                <input type="number" id='id' required value="<?=$student['paid_amount']?>"
+                                       placeholder='Paid amount' name="paid" class="form-control">
+                              </div>
+                              <div class="col-6 col-md-4 my-2">
+                                <label for="" class="form-label">Fees(LKR)</label>
+                                <input type="number" id='id' required value="<?=$student['fees']?>" placeholder='Fees'
+                                       name="fee" class="form-control">
+                              </div>
+                              <div class="col-6 col-md-4 my-2">
+                                <label for="" class="form-label">Balance(LKR)</label>
+                                <input type="number" id='id' required value="<?=$student['balance']?>"
+                                       placeholder='Balance' name="balance" class="form-control">
+                              </div>
+                            </div>
+
+
                             <div class="form-group my-2">
                               <label for="" class="form-label">Completed</label>
                               <input type="checkbox" id='status' name="completed" class="">

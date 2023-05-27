@@ -36,7 +36,12 @@ class User{
 
       if($stm->execute()){
         $res = $stm->get_result();
-        return password_verify($pass, $res->fetch_assoc()['password']) ? true : false;
+        if($res->num_rows>0){
+          return password_verify($pass, $res->fetch_assoc()['password']) ? true : false;
+        }else{
+          return false;
+        }
+        
       }else{
         return false;
       }
@@ -45,6 +50,49 @@ class User{
     }
     
   }
+
+  public function getAdmin($email):array|null{
+
+    $sql = "SELECT email,id FROM admin wHERE email='{$email}'";
+    $res = $this->db->query($sql);
+    if($res==TRUE && $res->num_rows>0){
+      return $res->fetch_assoc();
+    }
+
+    return null;
+  }
+
+  public function updateAdminPassword($currentPass,$newPass,$id):bool{
+
+    $pass = "SELECT password FROM admin WHERE id={$id}";
+    $newhash = password_hash($newPass, PASSWORD_BCRYPT);
+    $query = $this->db->query($pass);
+    if($query==TRUE && $query->num_rows>0){
+      $hash = $query->fetch_assoc()['password'];
+      if(password_verify($currentPass,$hash)){
+        $sql = "UPDATE admin SET password='{$newhash}' WHERE id={$id}";
+        if($this->db->query($sql)==TRUE){
+          return true;
+        }
+      }
+
+    }
+
+    return false;
+    
+
+
+  }
+
+  public function updateAdminEmail($email,$id){
+    $sql = "UPDATE admin SET email='{$email}' WHERE id={$id}";
+    if($this->db->query($sql)==TRUE){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 
   public function getAllStudents():array|null{
 

@@ -12,6 +12,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
   header("Location:../index.php",true,403);
   
 }
+$user = new User(Database::getDB());
 
 if(isset($_POST['admin-login'])){
 
@@ -21,11 +22,12 @@ if(isset($_POST['admin-login'])){
     header("Location:../index.php", true, 301);
     return;
   }
-  $user = new User(Database::getDB());
+  
   // echo $user->isAdmin($pass,$email);
 
   if ($user->isAdmin($pass,$email)) {
     $_SESSION['isadmin'] = true;
+    $_SESSION['email'] = $email;
 
 
     header("Location:../view/admin.dashboard.php");
@@ -41,6 +43,44 @@ if(isset($_POST['admin-login'])){
 
 }
 
+
+if(isset($_POST['edit-admin'])){
+  $newp = $_POST['newpass'];
+  $currentp = $_POST['cpass'];
+  $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+  $id=$_POST['adminid'];
+
+  if(!$email){
+    $_SESSION['error'] = 'Invalid user!';
+    return;
+  }
+
+  if($email!=$_SESSION['email']){
+    if($user->updateAdminEmail($email,$id)){
+      $_SESSION['msg'] = 'Email Changed!';
+      $_SESSION['email'] = $email;
+    }  
+  }
+
+  if(!empty($newp) && !empty($currentp)){
+    if($user->updateAdminPassword($currentp, $newp, $id)){
+      $_SESSION['msg'] = 'Password changed!';
+      $_SESSION['isadmin'] = null;
+      header("Location:../view/adminlogin.view.php");
+      return;
+    }else{
+      $_SESSION['error'] = 'opration failed!';
+      header("Location:{$_SERVER['HTTP_REFERER']}");
+      return;
+    }
+
+  }else{
+    $_SESSION['error'] = 'All inputs are required!';
+    header("Location:{$_SERVER['HTTP_REFERER']}");
+    return;
+  }
+
+}
 
 
 

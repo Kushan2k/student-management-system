@@ -28,15 +28,12 @@ class RegisterService{
     // $stID = $req['stid'];
     $stcontact = $req['stcontact'];
     $staddress = $req['staddress'];
-    $stbalance = $req['stbalance'];
-    $stregfee = $req['stregfee'];
-    $ststpaid = $req['stpaid'];
-    $stregdate = $req['stregdate'];
-    $class = $req['stclass'];
+    $gender = $_POST['gender'];
     $stemail = filter_var($req['stemail'], FILTER_VALIDATE_EMAIL);
     $dob = $req['stdob'];
     $course = $req['course'];
     $nic = htmlspecialchars($req['nic']);
+    $regdate = $_POST['stregdate'];
 
     $img = $files['stimg'];
     $UPLOAD_DIR = '../public/profiles/';
@@ -70,14 +67,13 @@ class RegisterService{
     try{
       $stm = $DB->prepare(
         "INSERT INTO student
-        (name,parent_name,address,email,date_of_birth,reg_date,paid_amount,fees,class_in,img_url,contact,balance,finished_date,NIC)
-        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        (name,parent_name,address,email,date_of_birth,reg_date,gender,img_url,contact,finished_date,NIC)
+        VALUES(?,?,?,?,?,?,?,?,?,?,?)"
       );
 
       if($stm){
 
-        $stm->bind_param('ssssssiiississ',$stName,$ParentName,$staddress,$stemail,$dob,$stregdate,$ststpaid,
-        $stregfee,$class,$img_url,$stcontact,$stbalance,$finishedDate,$nic
+        $stm->bind_param('sssssssssss',$stName,$ParentName,$staddress,$stemail,$dob,$regdate,$gender,$img_url,$stcontact,$finishedDate,$nic
         );
         
         

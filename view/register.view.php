@@ -3,7 +3,6 @@ include_once '../config/Database.php';
 $DB = Database::getDB()==null?die:Database::getDB();
 
 include_once '../config/Course.php';
-http_response_code(200);
 ?>
 <html lang="en">
 
@@ -51,7 +50,8 @@ http_response_code(200);
               </div> -->
               <div class="col-12 col-md-3">
                 <label for="" class="form-label text-capitalize">student address</label>
-                <input type="text" required placeholder='Enter Student Address' name="staddress" id="" class="form-control">
+                <input type="text" required placeholder='Enter Student Address' name="staddress" id=""
+                       class="form-control">
               </div>
               <div class="col-12 col-md-4">
                 <label for="" class="form-label text-capitalize">Date Of Birth</label>
@@ -74,55 +74,50 @@ http_response_code(200);
             <div class="row mx-auto gap-2">
               <div class="col-12 col-md-3">
                 <label for="" class="form-label text-capitalize">Student Email</label>
-                <input type="email" required placeholder='Enter Student Email' name='stemail' class="form-control" aria-label="">
+                <input type="email" required placeholder='Enter Student Email' name='stemail' class="form-control"
+                       aria-label="">
               </div>
               <div class="col-12 col-md-4">
                 <label for="" class="form-label text-capitalize">Contact number</label>
                 <input type="text" placeholder='Contact Number' required name='stcontact' class="form-control">
               </div>
               <div class="col-12 col-md-4">
-                <label for="" class="form-label text-capitalize">Student class</label>
-                <input type="number" placeholder='1' required name='stclass' class="form-control">
+                <label for="" class="form-label text-capitalize">Gender</label>
+                <select name="gender" id="" class="form-select">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
               </div>
             </div>
             <br>
             <div class="row mx-auto gap-2">
-              <div class="col-12 col-md-3">
+              <div class="col-12 col-md-5">
                 <label for="" class="form-label text-capitalize">registration date</label>
                 <input type="date" class="form-control" required name='stregdate' aria-label="">
               </div>
-              <div class="col-12 col-md-4">
-                <label for="" class="form-label text-capitalize">registration fee</label>
-                <input type="number" placeholder='Registration Fee' name='stregfee' class="form-control">
-              </div>
-              <div class="col-12 col-md-4">
-                <label for="" class="form-label text-capitalize">Paid Amount</label>
-                <input type="number" placeholder='Paind Amount' name='stpaid' class="form-control">
-              </div>
-            </div>
-            <br>
-            <div class="row mx-auto gap-2">
-              <div class="col-12 col-md-3">
-                <label for="" class="form-label text-capitalize">Balance</label>
-                <input type="number" placeholder='Enter Balance' name='stbalance' class="form-control" aria-label="">
-              </div>
-
-              <div class="col-12 col-md-5">
+              <div class="col-12 col-md-6">
                 <label for="" class="form-label text-capitalize">Select Course</label>
                 <select name="course" class='form-select'>
                   <?php
-                    foreach (getAllCourse($DB) as $value) {?>
-                      <option value='<?= $value['id']?>'><?=ucfirst($value['name'])?></option>
-                   <?php }
+                  foreach (getAllCourse($DB) as $value) {?>
+                  <option value='<?= $value['id']?>'><?=ucfirst($value['name'])?></option>
+                  <?php }
                   ?>
                 </select>
               </div>
+
+            </div>
+            <br>
+            <div class="row mx-auto gap-2">
+
+
+
               <div class="col-12 col-md-3">
                 <label for="" class="form-label text-capitalize">NIC</label>
                 <input type="text" required placeholder='Enter NIC' name='nic' class="form-control" aria-label="">
                 <small class='text-muted'>required</small>
               </div>
-              
+
 
             </div>
             <br>

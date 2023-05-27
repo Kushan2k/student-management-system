@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 function getAllCourse($db):array|null{
 
-  $res = $db->query("SELECT name,id FROM course");
+  $res = $db->query("SELECT name,id,fee FROM course");
   $cs = [];
   if($res==TRUE && $res->num_rows>0){
 

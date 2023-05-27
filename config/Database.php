@@ -25,7 +25,7 @@ class Database{
       $stm = "
       CREATE TABLE IF NOT EXISTS student(
         id INT AUTO_INCREMENT,
-        student_id INT NOT NULL,
+        student_id VARCHAR(20) NOT NULL DEFAULT 'N/A',
         name VARCHAR(255) NOT NULL,
         NIC VARCHAR(20) NOT NULL DEFAULT 'N/A',
         address VARCHAR(255) NOT NULL,
@@ -35,7 +35,7 @@ class Database{
         reg_date VARCHAR(255),
         paid_amount INT DEFAULT 0,
         fees INT DEFAULT 0,
-        class_in INT,
+        gender VARCHAR(20) NULL DEFAULT NULL,
         img_url VARCHAR(255),
         contact VARCHAR(11) NOT NULL,
         balance INT DEFAULT 0,

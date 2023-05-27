@@ -13,6 +13,7 @@ include_once '../config/User.php';
 include_once '../config/Course.php';
 $user=new User(Database::getDB());
 $courses = getAllCourse(Database::getDB());
+$admin = $user->getAdmin($_SESSION['email']);
 ?>
 <html lang="en">
 
@@ -35,16 +36,35 @@ $courses = getAllCourse(Database::getDB());
   <body>
     <div class="container py-5">
       <div class="container my-3">
+        <?php
+        if(isset($_SESSION['error'])){?>
+        <div class="container my-2">
+          <p class="alert alert-danger text-center"><?=ucfirst($_SESSION['error']) ?></p>
+        </div>
+        <?php $_SESSION['error'] = null;}
+        if(isset($_SESSION['msg'])){?>
+        <div class="container my-2">
+          <p class="alert alert-success text-center"><?=ucfirst($_SESSION['msg']) ?></p>
+        </div>
+        <?php $_SESSION['msg'] = null;}
+      ?>
         <a href='../index.php' class='btn btn-sm btn-danger'>Back</a>
         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addcourseModel">
           Add Course
+        </button>
+
+        <a  class="btn btn-primary btn-sm" href="./view.courses.php">
+          View Courses
+        </a>
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#adminConfigeModel">
+          Admin Config
         </button>
         <!-- Modal -->
         <div class="modal fade" id="addcourseModel" tabindex="-1" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
-              
+
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Add Course</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -70,9 +90,43 @@ $courses = getAllCourse(Database::getDB());
             </div>
           </div>
         </div>
-        <!-- <button class="btn btn-sm  btn-primary"></button>
-        <button class="btn btn-sm  btn-primary">Add</button>
-        <button class="btn btn-sm  btn-primary">Add</button> -->
+        <!-- Admin config model -->
+        <div class="modal fade" id="adminConfigeModel" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Change Admin Info</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form action="../controllers/AdminController.php" method="post">
+                <div class="modal-body">
+
+                  <div class="form-group">
+                    <label for="" class="form-label">Email</label>
+                    <input type="email" value='<?= $admin['email']?>' placeholder="Email" name="email" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="" class="form-label">Current Password</label>
+                    <input type="password" placeholder="Password" name="cpass" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="" class="form-label">New Password</label>
+                    <input type="password" placeholder="New Password" name="newpass" class="form-control">
+                    <input type="hidden" name='adminid' value='<?= $admin['id']?>'/>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" name="edit-admin" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="container">
         <form action="">
@@ -103,7 +157,7 @@ $courses = getAllCourse(Database::getDB());
                 echo '<option value="'.$course['name'].'">'.ucfirst($course['name']).'</option>';
               }
               ?>
-              
+
             </select>
           </div>
           <div class="col-10 mx-auto">
@@ -166,7 +220,8 @@ $courses = getAllCourse(Database::getDB());
 
                 </td>
                 <td>
-                  <a href="./edit.view.php?stid=<?=$student['id']?>" class="text-success"><i class="fa-solid fa-pen"></i></a>
+                  <a href="./edit.view.php?stid=<?=$student['id']?>" class="text-success"><i
+                       class="fa-solid fa-pen"></i></a>
                   <button type="button" class="border-0 text-danger" data-bs-toggle="modal"
                           data-bs-target="#exampleModal<?=$student['id']?>">
                     <i class="fa-solid fa-trash"></i>
