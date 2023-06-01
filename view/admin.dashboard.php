@@ -14,6 +14,18 @@ include_once '../config/Course.php';
 $user=new User(Database::getDB());
 $courses = getAllCourse(Database::getDB());
 $admin = $user->getAdmin($_SESSION['email']);
+
+$allstudents = null;
+
+if(isset($_GET['course']) && !empty($_GET['course'])){
+  $allstudents = getEnroledStudentByCourse(Database::getDB(),$_GET['course'] );
+}else{
+  $allstudents = $user->getAllStudents();
+}
+
+// print_r(getEnroledStudentByCourse(Database::getDB(),"Software Enginnering"));
+
+// print_r($user->getAllStudents());
 ?>
 <html lang="en">
 
@@ -129,7 +141,7 @@ $admin = $user->getAdmin($_SESSION['email']);
 
       </div>
       <div class="container">
-        <form action="">
+        <form action="<?= $_SERVER['PHP_SELF']?>">
           <div class="col-12">
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search" class="form-control">
           </div>
@@ -151,7 +163,7 @@ $admin = $user->getAdmin($_SESSION['email']);
           </div>
 
           <div class="col-12 my-3">
-            <select name="" id="" class="form-select">
+            <select name="course" id="" class="form-select">
               <?php
               foreach ($courses as $course) {
                 echo '<option value="'.$course['name'].'">'.ucfirst($course['name']).'</option>';
@@ -164,6 +176,7 @@ $admin = $user->getAdmin($_SESSION['email']);
             <input type="submit" value="Search" class="w-100 btn btn-sm btn-success" name="search">
           </div>
         </form>
+        <a href="./admin.dashboard.php" class='btn btn-sm btn-warning'>All</a>
       </div>
       <?php
       if(isset($_SESSION['error'])){?>
@@ -187,7 +200,8 @@ $admin = $user->getAdmin($_SESSION['email']);
                 <th>Name</th>
                 <th class="d-none d-md-flex">Email</th>
                 <th>Contact</th>
-                <th>Student Id</th>
+                <th><span class="d-none d-md-flex">Student</span> Id</th>
+                <th>Status</th>
                 <th class="d-none d-md-flex">Courses</th>
                 <th></th>
 
@@ -196,15 +210,16 @@ $admin = $user->getAdmin($_SESSION['email']);
             <tbody>
               <?php
 
-                foreach($user->getAllStudents() as $student){?>
+                foreach($allstudents as $student){?>
               <tr>
                 <td><?= ucfirst($student['name'])?></td>
                 <td class="d-none d-md-flex"><?= $student['email']?></td>
                 <td><?= $student['contact']?></td>
-                <td><?= $student['student_id']?></td>
+                <td><?= $student['stid']?></td>
+                <?= $student['completed']==0?'<td class="bg-warning text-white"><small>N/A</small></td>':'<td class="bg-success text-white"><small>Completed</small></td>' ?>
                 <td class="d-none d-md-flex">
                   <?php
-                    $courses = GetEntroledCourse($student['id'], Database::getDB());
+                    $courses = GetEntroledCourse($student['sid'], Database::getDB());
                     if($courses==null){?>
 
                   N/A
@@ -220,15 +235,15 @@ $admin = $user->getAdmin($_SESSION['email']);
 
                 </td>
                 <td>
-                  <a href="./edit.view.php?stid=<?=$student['id']?>" class="text-success"><i
+                  <a href="./edit.view.php?stid=<?=$student['sid']?>" class="text-success"><i
                        class="fa-solid fa-pen"></i></a>
                   <button type="button" class="border-0 text-danger" data-bs-toggle="modal"
-                          data-bs-target="#exampleModal<?=$student['id']?>">
+                          data-bs-target="#exampleModal<?=$student['sid']?>">
                     <i class="fa-solid fa-trash"></i>
                   </button>
 
                   <!-- Modal -->
-                  <div class="modal fade" id="exampleModal<?=$student['id']?>" tabindex="-1"
+                  <div class="modal fade" id="exampleModal<?=$student['sid']?>" tabindex="-1"
                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">

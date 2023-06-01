@@ -50,3 +50,22 @@ function GetEntroledCourse($userid,$db):array|null{
   return null;
 
 }
+
+function getEnroledStudentByCourse($db,$cname):array|null{
+
+ $stm = $db->prepare("SELECT student.id AS sid,email,student.name,contact,student.student_id AS stid,completed FROM registrations  LEFT JOIN course ON registrations.course_id=course.id JOIN student ON registrations.student_id=student.id WHERE course.name=?");
+  $stm->bind_param('s', $cname);
+  $courses = [];
+  if($stm->execute()){
+    $res = $stm->get_result();
+   if($res->num_rows>0){
+     while($r=$res->fetch_assoc()){
+      array_push($courses, $r);
+      }
+      return $courses;
+   }
+    return null;
+
+  }
+  return null;
+}

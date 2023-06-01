@@ -104,6 +104,7 @@ $courses = GetEntroledCourse($_SESSION['user_id'], Database::getDB());
                 echo "<tr><td colspan='4' class='text-center'>No Enrolled Courses</td></tr>";
               }else{
                 foreach ($courses as $course) {?>
+                <tr>
                   <td><?=ucfirst($course['name'])?></td>
                   <td class='d-none d-md-flex'><?=ucfirst($course['fee'])?></td>
                   <td><?=ucfirst($course['cetificate_no'])?></td>
@@ -116,8 +117,10 @@ $courses = GetEntroledCourse($_SESSION['user_id'], Database::getDB());
                       echo '<td class="text-warning">On progress</td>';
                     }
                     ?>
+                    </tr>
                   
                <?php }
+               
               }
 
               ?>

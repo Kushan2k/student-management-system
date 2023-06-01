@@ -28,14 +28,12 @@ if(session_status()!=PHP_SESSION_ACTIVE){
   <body>
 
     <div class="container-fluid p-5" style="height: 100vh;background-color: #192145;">
-      <div class="row ">
-        <div class="col-6 offset-6">
-          <a href="./view/register.view.php" class="btn btn-primary btn-lg">
-            <i class="fa-solid fa-plus"></i>
-            Register New Student
-          </a>
-        </div>
-      </div>
+        
+      <a href="./view/register.view.php" class="btn btn-primary ">
+        <i class="fa-solid fa-plus"></i>
+        Register New Student
+      </a>
+      <div class="row">
       <?php
       if(isset($_SESSION['error'])){?>
       <div class="container my-2">
@@ -48,6 +46,7 @@ if(session_status()!=PHP_SESSION_ACTIVE){
       </div>
       <?php $_SESSION['msg'] = null;}
      ?>
+     </div>
       <div class="row mt-5">
         <div class="col-12 col-lg-6 mx-auto">
           <h3 class="display-5 my-2 text-center fw-bold text-white">Certificate Verification</h3>
@@ -60,7 +59,7 @@ if(session_status()!=PHP_SESSION_ACTIVE){
                    class="fa-solid fa-magnifying-glass"></i></button>
             </div>
             <div class="mt-4 form-group d-flex justify-content-center">
-              <input type="submit" name="serach" value="Verify the certificate" class="btn btn-primary btn-lg">
+              <input type="submit" name="serach" value="Verify the certificate" class="btn btn-primary btn">
             </div>
           </form>
         </div>

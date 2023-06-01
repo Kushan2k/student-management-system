@@ -96,7 +96,7 @@ class User{
 
   public function getAllStudents():array|null{
 
-    $sql = "SELECT * FROM student ORDER BY id DESC";
+    $sql = "SELECT student.id AS sid,email,name,contact,student.student_id AS stid,completed FROM student  JOIN registrations ON student.id=registrations.student_id ORDER BY student.id DESC";
     $res=$this->db->query($sql);
     $rows = [];
     if($res==TRUE && $res->num_rows>0){
